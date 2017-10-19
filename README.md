@@ -4,7 +4,7 @@ ViewCompat项目简介
 
 build.gradle文件中添加:
 
-   compile 'com.github.ashLikun:ViewCompat:1.0.0'//
+   compile 'com.github.ashLikun:CompatView:1.0.1'//
 
 
 ## 详细介绍
