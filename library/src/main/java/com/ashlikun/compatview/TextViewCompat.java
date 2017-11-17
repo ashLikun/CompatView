@@ -2,8 +2,9 @@ package com.ashlikun.compatview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
+import android.graphics.Rect;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.Layout;
 import android.util.AttributeSet;
 
 /**
@@ -39,39 +40,63 @@ public class TextViewCompat extends AppCompatTextView {
 
     }
 
-    @Override
-    public void setPadding(int left, int top, int right, int bottom) {
-        int compatpaddingButton = bottom;
-        if (isNeedCompat()) {
-            compatpaddingButton = (int) (bottom - mSpacingAdd);
-        }
-        super.setPadding(left, top, right, compatpaddingButton);
-    }
+//    @Override
+//    public void setPadding(int left, int top, int right, int bottom) {
+//        int compatpaddingButton = bottom;
+//        if (isNeedCompat()) {
+//            compatpaddingButton = (int) (bottom - mSpacingAdd);
+//        }
+//        super.setPadding(left, top, right, compatpaddingButton);
+//    }
 
-    //手机厂商定制后的bug，原生的只是5.0
-    public boolean isNeedCompat() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return true;
-        } else if (Build.BRAND != null) {
-            String BRAND = Build.BRAND.toUpperCase();
-            if (BRAND.contains("VIVO") && Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                return true;
-            }
-            if (BRAND.contains("OPPO")) {
-                return true;
-            }
-            if (BRAND.contains("MEIZU") && !"m1 metal".equals(Build.MODEL)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+//    //手机厂商定制后的bug，原生的只是5.0
+//    public boolean isNeedCompat() {
+//        Log.e("aaaa", Build.BRAND + "   Build.MODEL=" + Build.MODEL);
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//            return true;
+//        } else if (Build.BRAND != null) {
+//            String BRAND = Build.BRAND.toUpperCase();
+//            if (BRAND.contains("VIVO") && Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+//                return true;
+//            }
+//            if (BRAND.contains("OPPO")) {
+//                return true;
+//            }
+//            //m1 note m3 note   m1 metal  M3s  U20  MX5正常
+////            if (BRAND.contains("MEIZU") && !"m1 metal".equals(Build.MODEL)) {
+////                return true;
+////            }
+//        }
+//
+//        return false;
+//    }
 
     @Override
     public void setLineSpacing(float add, float mult) {
         super.setLineSpacing(add, mult);
         mSpacingAdd = add;
 
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(getMeasuredWidth(), getMeasuredHeight() - calculateExtraSpace());
+    }
+
+    //计算需要兼容的底部多余的高度
+    public int calculateExtraSpace() {
+        int result = 0;
+        int lastLineIndex = getLineCount() - 1;
+
+        if (lastLineIndex >= 0) {
+            Layout layout = getLayout();
+            if (getMeasuredHeight() - getPaddingTop() - getPaddingBottom() == getLayout().getHeight()) {
+                Rect mRect = new Rect();
+                int baseline = getLineBounds(lastLineIndex, mRect);
+                result = mRect.bottom - (baseline + layout.getPaint().getFontMetricsInt().bottom);
+            }
+        }
+        return result;
     }
 }
