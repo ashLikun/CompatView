@@ -7,10 +7,13 @@
     tools:context="com.ashlikun.compatview.simple.MainActivity">
 
     <com.ashlikun.compatview.TextViewCompat
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:lineSpacingExtra="20dp"
+        android:maxLines="3"
+        android:maxWidth="100dp"
         android:text="1111111111\n2222222222\n3333333333\n444444444444"
         android:textColor="#ffffff" />
 
