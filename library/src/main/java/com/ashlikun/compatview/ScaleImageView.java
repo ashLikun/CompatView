@@ -21,7 +21,7 @@ public class ScaleImageView extends AppCompatImageView {
     /**
      * 按照宽度（0）或者高度（1）为基础
      */
-    private int orientation = 1;
+    private int orientation = 0;
 
     public ScaleImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
