@@ -14,10 +14,13 @@ import android.util.AttributeSet;
  * <p>
  * 功能介绍：textView的兼容
  * 1：lineSpacingExtra   兼容
+ * 2: 提供回调获取view宽度
  */
 
 public class TextViewCompat extends AppCompatTextView {
     float mSpacingAdd;
+    OnWidthChangListener widthChangListener;
+    private int currentWidth = 0;
 
     public TextViewCompat(Context context) {
         this(context, null);
@@ -40,7 +43,11 @@ public class TextViewCompat extends AppCompatTextView {
 
     }
 
-//    @Override
+    public void setWidthChangListener(OnWidthChangListener widthChangListener) {
+        this.widthChangListener = widthChangListener;
+    }
+
+    //    @Override
 //    public void setPadding(int left, int top, int right, int bottom) {
 //        int compatpaddingButton = bottom;
 //        if (isNeedCompat()) {
@@ -82,9 +89,19 @@ public class TextViewCompat extends AppCompatTextView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(getMeasuredWidth(), getMeasuredHeight() - calculateExtraSpace());
+        if (widthChangListener != null) {
+            if (currentWidth != getMeasuredWidth()) {
+                currentWidth = getMeasuredWidth();
+                widthChangListener.onWidthChang(getMeasuredWidth(), getMeasuredHeight());
+            }
+        }
     }
 
-    //计算需要兼容的底部多余的高度
+    /**
+     * 计算需要兼容的底部多余的高度
+     *
+     * @return
+     */
     public int calculateExtraSpace() {
         int result = 0;
         int lastLineIndex = getLineCount() - 1;
@@ -98,5 +115,15 @@ public class TextViewCompat extends AppCompatTextView {
             }
         }
         return result;
+    }
+
+    public interface OnWidthChangListener {
+        /**
+         * 当TextView宽度改变的时候，就是可以获取宽度的时候
+         *
+         * @param width
+         * @param height
+         */
+        void onWidthChang(int width, int height);
     }
 }

@@ -13,14 +13,19 @@ import android.view.WindowManager;
  * 创建时间: 2018/6/11 0011　下午 3:55
  * 邮箱　　：496546144@qq.com
  * <p>
- * 功能介绍：最大高度的
+ * 功能介绍：最大高度的ScrollView
  */
 public class MaxheightScrollView extends NestedScrollView {
     private static final float DEFAULT_MAX_RATIO = 0.6f;
     private static final float DEFAULT_MAX_HEIGHT = 0f;
-
-    private float mMaxRatio = DEFAULT_MAX_RATIO;// 优先级高
-    private float mMaxHeight = DEFAULT_MAX_HEIGHT;// 优先级低
+    /**
+     * 优先级高
+     */
+    private float mMaxRatio = DEFAULT_MAX_RATIO;
+    /**
+     * 优先级低
+     */
+    private float mMaxHeight = DEFAULT_MAX_HEIGHT;
 
     public MaxheightScrollView(@NonNull Context context) {
         this(context, null);
