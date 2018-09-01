@@ -15,36 +15,36 @@ import android.view.WindowManager;
  * <p>
  * 功能介绍：最大高度的ScrollView
  */
-public class MaxheightScrollView extends NestedScrollView {
-    private static final float DEFAULT_MAX_RATIO = 0.6f;
-    private static final float DEFAULT_MAX_HEIGHT = 0f;
-    /**
-     * 优先级高
-     */
-    private float mMaxRatio = DEFAULT_MAX_RATIO;
+public class MaxHeightScrollView extends NestedScrollView {
     /**
      * 优先级低
+     * 是屏幕高度的多少
      */
-    private float mMaxHeight = DEFAULT_MAX_HEIGHT;
+    private float mMaxRatio = 0;
+    /**
+     * 优先级高
+     * 最大高度
+     */
+    private float mMaxHeight = 0;
 
-    public MaxheightScrollView(@NonNull Context context) {
+    public MaxHeightScrollView(@NonNull Context context) {
         this(context, null);
     }
 
-    public MaxheightScrollView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public MaxHeightScrollView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MaxheightScrollView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MaxHeightScrollView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context, attrs);
     }
 
     private void initView(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.MaxheightScrollView);
-        mMaxRatio = a.getFloat(R.styleable.MaxheightScrollView_mhsv_HeightRatio, DEFAULT_MAX_RATIO);
-        mMaxHeight = a.getDimension(R.styleable.MaxheightScrollView_mhsv_HeightDimen, DEFAULT_MAX_HEIGHT);
+                R.styleable.MaxHeightScrollView);
+        mMaxRatio = a.getFloat(R.styleable.MaxHeightScrollView_mhsv_heightRatio, 0);
+        mMaxHeight = a.getDimension(R.styleable.MaxHeightScrollView_mhsv_maxHeight, 0);
         a.recycle();
         init();
     }
@@ -60,7 +60,10 @@ public class MaxheightScrollView extends NestedScrollView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
+        //如果没有设置高度
+        if (mMaxHeight <= 0) {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
@@ -80,6 +83,18 @@ public class MaxheightScrollView extends NestedScrollView {
         int maxHeightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize,
                 heightMode);
         super.onMeasure(widthMeasureSpec, maxHeightMeasureSpec);
+    }
+
+    public void setMaxRatio(float mMaxRatio) {
+        this.mMaxRatio = mMaxRatio;
+        init();
+        requestLayout();
+    }
+
+    public void setMaxHeight(float mMaxHeight) {
+        this.mMaxHeight = mMaxHeight;
+        init();
+        requestLayout();
     }
 
     /**

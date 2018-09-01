@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="MaxheightScrollView">
-        <attr name="mhsv_HeightRatio" format="reference|float" />
-        <attr name="mhsv_HeightDimen" format="reference|dimension" />
+    <declare-styleable name="MaxHeightScrollView">
+        <attr name="mhsv_heightRatio" format="reference|float" />
+        <attr name="mhsv_maxHeight" format="reference|dimension" />
+    </declare-styleable>
+    <declare-styleable name="MaxHeightFrameLayout">
+        <attr name="mhf_heightRatio" format="reference|float" />
+        <attr name="mhf_maxHeight" format="reference|dimension" />
     </declare-styleable>
     <declare-styleable name="FrameScalLayout">
         <attr name="fsl_ratio" format="reference|float" />
