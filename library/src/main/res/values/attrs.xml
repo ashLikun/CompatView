@@ -17,7 +17,7 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="ScaleImageView">
-        <attr name="sci_ratio" format="integer" />
+        <attr name="sci_ratio" format="reference|float" />
         <!--按照那个值为基础-->
         <attr name="sci_orientation">
             <enum name="width" value="0"></enum>
