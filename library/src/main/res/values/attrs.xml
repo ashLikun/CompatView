@@ -16,6 +16,22 @@
             <enum name="height" value="1"></enum>
         </attr>
     </declare-styleable>
+    <declare-styleable name="LineScalLayout">
+        <attr name="lsl_ratio" format="reference|float" />
+        <!--按照那个值为基础-->
+        <attr name="lsl_orientation">
+            <enum name="width" value="0"></enum>
+            <enum name="height" value="1"></enum>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="RelativeScalLayout">
+        <attr name="rsl_ratio" format="reference|float" />
+        <!--按照那个值为基础-->
+        <attr name="rsl_orientation">
+            <enum name="width" value="0"></enum>
+            <enum name="height" value="1"></enum>
+        </attr>
+    </declare-styleable>
     <declare-styleable name="ScaleImageView">
         <attr name="sci_ratio" format="reference|float" />
         <!--按照那个值为基础-->
