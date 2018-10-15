@@ -489,10 +489,18 @@ public class SpannableUtils {
             return this;
         }
 
+        public boolean isSetImage() {
+            return (imageIsBitmap || imageIsDrawable || imageIsResourceId);
+        }
+
         /**
          * 设置样式
          */
         private void setSpan() {
+            if (isSetImage()) {
+                //如果设置图片，就强制设置文字为"."
+                this.text = ".";
+            }
             if (TextUtils.isEmpty(this.text)) {
                 clean();
                 return;
@@ -545,7 +553,7 @@ public class SpannableUtils {
                 mBuilder.setSpan(new AlignmentSpan.Standard(align), start, end, flag);
             }
             //设置图片
-            if (imageIsBitmap || imageIsDrawable || imageIsResourceId) {
+            if (isSetImage()) {
                 CentreImageSpan span = null;
                 if (imageIsBitmap) {
                     drawable = new BitmapDrawable(AppUtils.getApp().getResources(), bitmap);
