@@ -6,16 +6,16 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 
 /**
  * 作者　　: 李坤
  * 创建时间: 2018/6/11 0011　下午 3:55
  * 邮箱　　：496546144@qq.com
  * <p>
- * 功能介绍：最大高度的LinearLayout
+ * 功能介绍：最大高度的FrameLayout
  */
-public class MaxHeightFrameLayout extends LinearLayout {
+public class MaxHeightLineLayout extends FrameLayout {
     /**
      * 优先级低
      * 是屏幕高度的多少
@@ -27,24 +27,24 @@ public class MaxHeightFrameLayout extends LinearLayout {
      */
     private float mMaxHeight = 0;
 
-    public MaxHeightFrameLayout(@NonNull Context context) {
+    public MaxHeightLineLayout(@NonNull Context context) {
         this(context, null);
     }
 
-    public MaxHeightFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public MaxHeightLineLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MaxHeightFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MaxHeightLineLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context, attrs);
     }
 
     private void initView(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.MaxHeightLineLayout);
-        mMaxRatio = a.getFloat(R.styleable.MaxHeightLineLayout_mhl_heightRatio, 0);
-        mMaxHeight = a.getDimension(R.styleable.MaxHeightLineLayout_mhl_maxHeight, 0);
+                R.styleable.MaxHeightFrameLayout);
+        mMaxRatio = a.getFloat(R.styleable.MaxHeightFrameLayout_mhf_heightRatio, 0);
+        mMaxHeight = a.getDimension(R.styleable.MaxHeightFrameLayout_mhf_maxHeight, 0);
         a.recycle();
         init();
     }

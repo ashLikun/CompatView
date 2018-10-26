@@ -8,6 +8,10 @@
         <attr name="mhf_heightRatio" format="reference|float" />
         <attr name="mhf_maxHeight" format="reference|dimension" />
     </declare-styleable>
+    <declare-styleable name="MaxHeightLineLayout">
+        <attr name="mhl_heightRatio" format="reference|float" />
+        <attr name="mhl_maxHeight" format="reference|dimension" />
+    </declare-styleable>
     <declare-styleable name="FrameScalLayout">
         <attr name="fsl_ratio" format="reference|float" />
         <!--按照那个值为基础-->
