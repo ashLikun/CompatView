@@ -6,16 +6,16 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 /**
  * 作者　　: 李坤
  * 创建时间: 2018/6/11 0011　下午 3:55
  * 邮箱　　：496546144@qq.com
  * <p>
- * 功能介绍：最大高度的FrameLayout
+ * 功能介绍：最大高度的LinearLayout
  */
-public class MaxHeightLineLayout extends FrameLayout {
+public class MaxHeightLineLayout extends LinearLayout {
     /**
      * 优先级低
      * 是屏幕高度的多少
@@ -42,9 +42,9 @@ public class MaxHeightLineLayout extends FrameLayout {
 
     private void initView(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.MaxHeightFrameLayout);
-        mMaxRatio = a.getFloat(R.styleable.MaxHeightFrameLayout_mhf_heightRatio, 0);
-        mMaxHeight = a.getDimension(R.styleable.MaxHeightFrameLayout_mhf_maxHeight, 0);
+                R.styleable.MaxHeightLineLayout);
+        mMaxRatio = a.getFloat(R.styleable.MaxHeightLineLayout_mhl_heightRatio, 0);
+        mMaxHeight = a.getDimension(R.styleable.MaxHeightLineLayout_mhl_maxHeight, 0);
         a.recycle();
         init();
     }
