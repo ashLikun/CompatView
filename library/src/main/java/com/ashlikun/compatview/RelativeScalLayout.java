@@ -51,22 +51,32 @@ public class RelativeScalLayout extends RelativeLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        if (ratio != 0) {
-            if (orientation == 0) {
-                //宽度不变
-                heightSize = (int) (widthSize / ratio);
-                heightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize,
-                        MeasureSpec.EXACTLY);
-            } else {
-                //高度不变
-                widthSize = (int) (heightSize * ratio);
-                widthMeasureSpec = MeasureSpec.makeMeasureSpec(widthSize,
-                        MeasureSpec.EXACTLY);
-            }
+        if (ratio <= 0) {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            return;
         }
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        // 如果子类设置了精确的宽高
+        if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY
+                && (widthSize != 0 && heightSize != 0)) {
+            setMeasuredDimension(widthSize, heightSize);
+            return;
+        }
+        //宽度不变
+        if (orientation == 0) {
+            //宽度不变
+            heightSize = (int) (widthSize / ratio);
+            setMeasuredDimension(widthSize, heightSize);
+            return;
+        } else {
+            //高度不变
+            widthSize = (int) (heightSize * ratio);
+            setMeasuredDimension(widthSize, heightSize);
+            return;
+        }
     }
 
     /**

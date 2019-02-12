@@ -45,14 +45,27 @@ public class ScaleImageView extends AppCompatImageView {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
         }
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        // 如果子类设置了精确的宽高
+        if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY
+                && (widthSize != 0 && heightSize != 0)) {
+            setMeasuredDimension(widthSize, heightSize);
+            return;
+        }
+        //宽度不变
         if (orientation == 0) {
-            int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-            int height = (int) (widthSize / ratio);
-            super.onMeasure(MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
+            //宽度不变
+            heightSize = (int) (widthSize / ratio);
+            setMeasuredDimension(widthSize, heightSize);
+            return;
         } else {
-            int height = MeasureSpec.getSize(heightMeasureSpec);
-            int width = (int) (height * ratio);
-            super.onMeasure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
+            //高度不变
+            widthSize = (int) (heightSize * ratio);
+            setMeasuredDimension(widthSize, heightSize);
+            return;
         }
     }
 
