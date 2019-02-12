@@ -51,7 +51,7 @@ public class ScaleImageView extends AppCompatImageView {
             super.onMeasure(MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
         } else {
             int height = MeasureSpec.getSize(heightMeasureSpec);
-            int width = (int) (height / ratio);
+            int width = (int) (height * ratio);
             super.onMeasure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
         }
     }

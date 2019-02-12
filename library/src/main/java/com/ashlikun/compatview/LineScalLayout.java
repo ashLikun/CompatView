@@ -61,7 +61,7 @@ public class LineScalLayout extends LinearLayout {
                         MeasureSpec.EXACTLY);
             } else {
                 //高度不变
-                widthSize = (int) (heightSize / ratio);
+                widthSize = (int) (heightSize * ratio);
                 widthMeasureSpec = MeasureSpec.makeMeasureSpec(widthSize,
                         MeasureSpec.EXACTLY);
             }

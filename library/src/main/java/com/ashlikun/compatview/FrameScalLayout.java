@@ -61,7 +61,7 @@ public class FrameScalLayout extends FrameLayout {
                         MeasureSpec.EXACTLY);
             } else {
                 //高度不变
-                widthSize = (int) (heightSize / ratio);
+                widthSize = (int) (heightSize * ratio);
                 widthMeasureSpec = MeasureSpec.makeMeasureSpec(widthSize,
                         MeasureSpec.EXACTLY);
             }
