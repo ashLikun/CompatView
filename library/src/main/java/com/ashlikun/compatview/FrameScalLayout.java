@@ -62,19 +62,19 @@ public class FrameScalLayout extends FrameLayout {
         // 如果子类设置了精确的宽高
         if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY
                 && (widthSize != 0 && heightSize != 0)) {
-            setMeasuredDimension(widthSize, heightSize);
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
         }
         //宽度不变
         if (orientation == 0) {
             //宽度不变
             heightSize = (int) (widthSize / ratio);
-            setMeasuredDimension(widthSize, heightSize);
+            super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(heightSize, heightMode));
             return;
         } else {
             //高度不变
             widthSize = (int) (heightSize * ratio);
-            setMeasuredDimension(widthSize, heightSize);
+            super.onMeasure(MeasureSpec.makeMeasureSpec(widthSize, widthMode), heightMeasureSpec);
             return;
         }
     }
