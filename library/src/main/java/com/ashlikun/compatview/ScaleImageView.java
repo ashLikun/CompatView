@@ -58,15 +58,20 @@ public class ScaleImageView extends AppCompatImageView {
         //宽度不变
         if (orientation == 0) {
             //宽度不变
-            heightSize = (int) (widthSize / ratio);
-            setMeasuredDimension(widthSize, heightSize);
-            return;
+            if (getLayoutParams() != null && getLayoutParams().width > 0) {
+                heightSize = (int) (getLayoutParams().width * ratio);
+            } else {
+                heightSize = (int) (widthSize / ratio);
+            }
         } else {
             //高度不变
-            widthSize = (int) (heightSize * ratio);
-            setMeasuredDimension(widthSize, heightSize);
-            return;
+            if (getLayoutParams() != null && getLayoutParams().height > 0) {
+                widthSize = (int) (getLayoutParams().height * ratio);
+            } else {
+                widthSize = (int) (heightSize * ratio);
+            }
         }
+        super.onMeasure(MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY));
     }
 
     public float getRatio() {

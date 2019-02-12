@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.ashlikun.compatview.simple.MainActivity">
 
     <com.ashlikun.compatview.TextViewCompat
@@ -13,5 +14,19 @@
         android:background="@color/colorAccent"
         android:maxLines="1"
         android:textColor="#ffffff" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.ashlikun.compatview.ScaleImageView
+            android:id="@+id/levelIv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="#ff0000"
+            android:src="@mipmap/ic_launcher"
+            app:sci_orientation="height"
+            app:sci_ratio="1" />
+    </RelativeLayout>
 
 </LinearLayout>
