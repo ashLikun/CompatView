@@ -52,6 +52,9 @@ public class ExpandTextView extends AppCompatTextView {
         if (!mIsUseExpand) {
             return;
         }
+        if (mText == null) {
+            mText = "";
+        }
         // 文字计算辅助工具
         StaticLayout sl = new StaticLayout(mText, getPaint(), getMeasuredWidth() - getPaddingLeft() - getPaddingRight()
                 , Layout.Alignment.ALIGN_CENTER, 1, 0, true);
@@ -117,7 +120,7 @@ public class ExpandTextView extends AppCompatTextView {
         mIsUseExpand = true;
         mExpanded = expanded;
         mCallback = callback;
-
+        mText = text;
         // 设置要显示的文字，这一行必须要，否则 onMeasure 宽度测量不正确
         setText(text);
     }
