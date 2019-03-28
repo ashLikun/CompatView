@@ -122,12 +122,6 @@ public class ExpandTextView extends AppCompatTextView {
         setText(text);
     }
 
-    @Override
-    public void setText(CharSequence text, BufferType type) {
-        super.setText(text, type);
-        mText = text.toString();
-    }
-
     public void setExpanded(boolean expanded) {
         this.mExpanded = mExpanded;
     }
