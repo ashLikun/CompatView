@@ -1,7 +1,7 @@
 package com.ashlikun.compatview.simple;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.widget.TextView;
 
