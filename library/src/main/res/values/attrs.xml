@@ -44,4 +44,14 @@
             <enum name="height" value="1"></enum>
         </attr>
     </declare-styleable>
+    <declare-styleable name="ExpandTextView">
+        <!--最多展示的行数-->
+        <attr name="etv_maxLineCount" format="integer" />
+        <!--是否开启动画-->
+        <attr name="etv_isAnim" format="boolean" />
+        <!--动画时长-->
+        <attr name="etv_duration" format="integer" />
+        <!--占位末端的文字(汉字)个数-->
+        <attr name="etv_endTextNumber" format="integer" />
+    </declare-styleable>
 </resources>

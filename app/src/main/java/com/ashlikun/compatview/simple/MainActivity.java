@@ -1,12 +1,19 @@
 package com.ashlikun.compatview.simple;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.SpannableString;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.ashlikun.compatview.ExpandTextView;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
+    ExpandTextView expandTv;
+    Button actionExpand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         AppUtils.app = getApplication();
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
+        expandTv = findViewById(R.id.expandTv);
+        actionExpand = findViewById(R.id.actionExpand);
         int color = 0xffff6e00;
         TextDrawable appDrawable = new TextDrawable()
                 .setTextColor(color)
@@ -65,5 +74,23 @@ public class MainActivity extends AppCompatActivity {
 //        ss.setSpan(span, 18, 19, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 //
         textView.setText(ss);
+        expandTv.setText("码都来自AppCompatTextViewAutoSizeHelper，修修补补就变成了下面的类。Google在构建StaticLayout时候反射了部分TextView方法，虽然都在说不推荐反射，1234567890了反射那肯定是有原因的，而且Google用了MethodCacheMap做了Method缓存降低了反射对性能的影响，反射时候用defaultValue来处理反射失败的情况。你可以尝试将反射部分的代码改成下面的代码来测试反射失败的情况",
+                false, new ExpandTextView.Callback() {
+                    @Override
+                    public void onChang(boolean isExpanded) {
+                        actionExpand.setText(isExpanded ? "收起" : "展开");
+                    }
+
+                    @Override
+                    public void onLoss() {
+
+                    }
+                });
+        actionExpand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expandTv.setChanged();
+            }
+        });
     }
 }
