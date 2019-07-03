@@ -44,6 +44,10 @@ public class ExpandTextView extends AppCompatTextView {
      */
     Callback mCallback;
     /**
+     * 动画回调
+     */
+    AnimCallback mAnimCallback;
+    /**
      * 源文字内容
      */
     String mText;
@@ -177,11 +181,21 @@ public class ExpandTextView extends AppCompatTextView {
         isAnimIng = true;
         AnimatorListenerAdapter listenerAdapter = new AnimatorListenerAdapter() {
             @Override
+            public void onAnimationStart(Animator animation) {
+                if (mAnimCallback != null) {
+                    mAnimCallback.onAnimStrat(expanded);
+                }
+            }
+
+            @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 isAnimIng = false;
                 if (expanded) {
                     setMaxLines(Integer.MAX_VALUE);
+                }
+                if (mAnimCallback != null) {
+                    mAnimCallback.onAnimEnd(expanded);
                 }
             }
 
@@ -233,6 +247,10 @@ public class ExpandTextView extends AppCompatTextView {
             return new StaticLayout(text, getPaint(), getMeasuredWidth() - getPaddingLeft() - getPaddingRight()
                     , Layout.Alignment.ALIGN_CENTER, getLineSpacingMultiplier(), getLineSpacingExtra(), true);
         }
+    }
+
+    public void setAnimCallback(AnimCallback mAnimCallback) {
+        this.mAnimCallback = mAnimCallback;
     }
 
     /**
@@ -324,5 +342,16 @@ public class ExpandTextView extends AppCompatTextView {
         void onLoss();
     }
 
+    public interface AnimCallback {
 
+        /**
+         * 动画执行监听
+         */
+        void onAnimStrat(boolean isExpanded);
+
+        /**
+         * 动画执行监听
+         */
+        void onAnimEnd(boolean isExpanded);
+    }
 }

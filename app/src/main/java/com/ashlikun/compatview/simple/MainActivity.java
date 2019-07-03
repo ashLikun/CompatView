@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 //        ss.setSpan(span, 18, 19, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 //
         textView.setText(ss);
-        expandTv.setText("码都来自AppCompatTextViewAutoSizeHelper，修修补补就变成了下面的类。Google在构建StaticLayout时候反射了部分TextView方法，虽然都在说不推荐反射，1234567890了反射那肯定是有原因的，而且Google用了MethodCacheMap做了Method缓存降低了反射对性能的影响，反射时候用defaultValue来处理反射失败的情况。你可以尝试将反射部分的代码改成下面的代码来测试反射失败的情况",
+        expandTv.setText("码都来自AppCompatTextViewAutoSizeHelper，修修补补就变成了下面的类。Google在构建StaticLayout时候反射了\n\n部分TextView方法，\n\n虽然都在说不推荐反射，\n\n1234567890了反射那肯定是有原因的，而且Google用了MethodCacheMap做了Method缓存降低了反射对性能的影响，反射时候用defaultValue来处理反射失败的情况。你可以尝试将反射部分的代码改成下面的代码来测试反射失败的情况",
                 false, new ExpandTextView.Callback() {
                     @Override
                     public void onChang(boolean isExpanded) {
