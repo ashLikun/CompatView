@@ -72,7 +72,7 @@ public class ScaleImageView extends AppCompatImageView {
                 widthSize = (int) (heightSize * ratio);
             }
         }
-        super.onMeasure(MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY));
+        setMeasuredDimension(widthSize, heightSize);
     }
 
     public float getRatio() {
