@@ -2,8 +2,9 @@ package com.ashlikun.compatview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 /**
  * @author　　: 李坤
@@ -59,7 +60,7 @@ public class ScaleImageView extends AppCompatImageView {
         if (orientation == 0) {
             //宽度不变
             if (getLayoutParams() != null && getLayoutParams().width > 0) {
-                heightSize = (int) (getLayoutParams().width * ratio);
+                heightSize = (int) (getLayoutParams().width / ratio);
             } else {
                 heightSize = (int) (widthSize / ratio);
             }

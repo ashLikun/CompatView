@@ -9,11 +9,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ashlikun.compatview.ExpandTextView;
+import com.ashlikun.compatview.ScaleImageView;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
     ExpandTextView expandTv;
     Button actionExpand;
+    ScaleImageView levelIv;
+    boolean isChang = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
         expandTv = findViewById(R.id.expandTv);
+        levelIv = findViewById(R.id.levelIv);
         actionExpand = findViewById(R.id.actionExpand);
         int color = 0xffff6e00;
         TextDrawable appDrawable = new TextDrawable()
@@ -89,7 +93,15 @@ public class MainActivity extends AppCompatActivity {
         actionExpand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                expandTv.setChanged();
+//                expandTv.setChanged();
+                if (isChang) {
+                    isChang = false;
+                    levelIv.setRatio(1.44f);
+                } else {
+                    isChang = true;
+                    levelIv.setRatio(2);
+                }
+
             }
         });
     }

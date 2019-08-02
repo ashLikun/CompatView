@@ -15,19 +15,15 @@
         android:maxLines="1"
         android:textColor="#ffffff" />
 
-    <RelativeLayout
+    <com.ashlikun.compatview.ScaleImageView
+        android:id="@+id/levelIv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.ashlikun.compatview.ScaleImageView
-            android:id="@+id/levelIv"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="#ff0000"
-            android:src="@mipmap/ic_launcher"
-            app:sci_orientation="height"
-            app:sci_ratio="1" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:background="#ff0000"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/aaaaaaaaaaaaaaaa"
+        app:sci_orientation="width"
+        app:sci_ratio="2" />
 
     <com.ashlikun.compatview.ExpandTextView
         android:id="@+id/expandTv"
