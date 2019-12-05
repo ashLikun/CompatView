@@ -2,11 +2,12 @@ package com.ashlikun.compatview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.util.AttributeSet;
+import android.view.WindowManager;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
-import android.util.AttributeSet;
-import android.view.WindowManager;
 
 /**
  * 作者　　: 李坤
@@ -53,7 +54,7 @@ public class MaxHeightScrollView extends NestedScrollView {
     private void init() {
         if (mMaxHeight <= 0) {
             mMaxHeight = mMaxRatio * (float) getScreenHeight(getContext());
-        } else {
+        } else if (mMaxRatio > 0) {
             mMaxHeight = Math.min(mMaxHeight, mMaxRatio * (float) getScreenHeight(getContext()));
         }
     }

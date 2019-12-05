@@ -2,11 +2,12 @@ package com.ashlikun.compatview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * 作者　　: 李坤
@@ -53,7 +54,7 @@ public class MaxHeightFrameLayout extends FrameLayout {
     private void init() {
         if (mMaxHeight <= 0) {
             mMaxHeight = mMaxRatio * (float) getScreenHeight(getContext());
-        } else {
+        } else if (mMaxRatio > 0) {
             mMaxHeight = Math.min(mMaxHeight, mMaxRatio * (float) getScreenHeight(getContext()));
         }
     }
