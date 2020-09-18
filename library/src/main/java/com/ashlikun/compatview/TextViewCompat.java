@@ -3,9 +3,12 @@ package com.ashlikun.compatview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.text.Layout;
+import android.text.method.MovementMethod;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * 作者　　: 李坤
@@ -21,6 +24,7 @@ public class TextViewCompat extends AppCompatTextView {
     float mSpacingAdd;
     OnWidthChangListener widthChangListener;
     private int currentWidth = 0;
+    public boolean movementMethodClick = false;
 
     public TextViewCompat(Context context) {
         this(context, null);
@@ -125,5 +129,47 @@ public class TextViewCompat extends AppCompatTextView {
          * @param height
          */
         void onWidthChang(int width, int height);
+    }
+
+    /**
+     * 设置了ClickableSpan导致的上层View点击事件无法响应解决方案
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        MovementMethod movementMethod = getMovementMethod();
+        //这里引用 另外一个库的FocusLinkMovementMethod对象   CommonUtils库
+        if (movementMethod != null && movementMethod instanceof OnLongClickListener) {
+            movementMethodClick = false;
+            boolean result = super.onTouchEvent(event);
+            movementMethodClick = ((OnLongClickListener) movementMethod).onLongClick(null);
+            return result;
+        } else {
+            return super.onTouchEvent(event);
+        }
+    }
+
+    /**
+     * 设置了ClickableSpan导致的上层View点击事件无法响应解决方案
+     */
+    public void setMovementMethods(MovementMethod movement) {
+        boolean focusable = isFocusable();
+        boolean isClickable = isClickable();
+        boolean isLongClickable = isLongClickable();
+        super.setMovementMethod(movement);
+        setFocusable(focusable);
+        setClickable(isClickable);
+        setLongClickable(isLongClickable);
+    }
+
+    /**
+     * 设置了ClickableSpan导致的上层View点击事件无法响应解决方案
+     */
+    @Override
+    public boolean performClick() {
+        if (!movementMethodClick) {
+            return super.performClick();
+        }
+        return false;
     }
 }
