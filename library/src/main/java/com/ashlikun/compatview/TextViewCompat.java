@@ -142,7 +142,7 @@ public class TextViewCompat extends AppCompatTextView {
         if (movementMethod != null && movementMethod instanceof OnLongClickListener) {
             movementMethodClick = false;
             boolean result = super.onTouchEvent(event);
-            movementMethodClick = ((OnLongClickListener) movementMethod).onLongClick(null);
+            movementMethodClick = ((OnLongClickListener) movementMethod).onLongClick(this);
             return result;
         } else {
             return super.onTouchEvent(event);

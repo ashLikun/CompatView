@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
         levelIv = findViewById(R.id.levelIv);
         actionExpand = findViewById(R.id.actionExpand);
         int color = 0xffff6e00;
-        TextDrawable appDrawable = new TextDrawable()
-                .setTextColor(color)
-                .setText("我是APP")
-                .setPadding(5, 2, 5, 2)
-                .setTextSize(11)
+        TextDrawable appDrawable = new TextDrawable();
+        appDrawable.setTextColor(color);
+        appDrawable.setText("我是APP");
+        appDrawable.setPadding(5, 2, 5, 2);
+        appDrawable.setTextSize(11)
                 .setCornerRadiusNew(3)
                 .setColorNew(0xfffff7ee);
 
