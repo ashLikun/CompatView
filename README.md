@@ -1,8 +1,8 @@
 [![Release](https://jitpack.io/v/ashLikun/CompatView.svg)](https://jitpack.io/#ashLikun/CompatView)
 
 
-ViewCompat项目简介
-    对系统view的兼容，系统兼容，和api兼容
+CompatView项目简介
+    对系统view的兼容，系统兼容，和api兼容,和一些常用的view
 ## 使用方法
 
 build.gradle文件中添加:

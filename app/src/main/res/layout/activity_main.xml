@@ -15,15 +15,28 @@
         android:maxLines="1"
         android:textColor="#ffffff" />
 
-    <com.ashlikun.compatview.ScaleImageView
-        android:id="@+id/levelIv"
+    <FrameLayout
+        android:id="@+id/imageRo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ff0000"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/aaaaaaaaaaaaaaaa"
-        app:sci_orientation="width"
-        app:sci_ratio="2" />
+        android:layout_height="wrap_content">
+
+        <com.ashlikun.compatview.ScaleImageView
+            android:id="@+id/levelIv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff0000"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/aaaaaaaaaaaaaaaa"
+            app:sci_orientation="width"
+            app:sci_ratio="2" />
+
+        <com.ashlikun.compatview.label.LabelView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:backgroundColor="@color/colorPrimary"
+            app:textTitle="1111"
+            app:textTitleColor="@color/cardview_light_background"></com.ashlikun.compatview.label.LabelView>
+    </FrameLayout>
 
     <com.ashlikun.compatview.ExpandTextView
         android:id="@+id/expandTv"

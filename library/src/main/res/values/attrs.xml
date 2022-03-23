@@ -54,4 +54,48 @@
         <!--占位末端的文字(汉字)个数-->
         <attr name="etv_endTextNumber" format="integer" />
     </declare-styleable>
+    <!--LabelView-->
+    <declare-styleable name="LabelView">
+        <!--Label 的背景颜色-->
+        <attr name="backgroundColor" format="color" />
+        <!--第一行文字的颜色，如果 Label 作为单行（不设置textTitle）则无效-->
+        <attr name="textTitleColor" format="color" />
+        <!--第二行文字的颜色-->
+        <attr name="textContentColor" format="color" />
+        <!--第一行文字的内容，如果文字过长注意调节 labelTopPadding 的值变大，单行 Label 时不要设置此值-->
+        <attr name="textTitle" format="string" />
+        <!--第二行文字的内容，单行显示时推荐用此-->
+        <attr name="textContent" format="string" />
+        <!--第一行文字的大小，默认10sp，如果 Label 作为单行（不设置textTitle）则无效-->
+        <attr name="textTitleSize" format="dimension" />
+        <!--第二行文字的大小，默认12sp-->
+        <attr name="textContentSize" format="dimension" />
+        <!--第一行文字上边缘距离背景顶部（注意三角形或者梯形）的偏移量，默认为15dp-->
+        <attr name="labelTopPadding" format="dimension" />
+        <!--第一行文字底部与第二行文字顶部之间的偏移距离-->
+        <attr name="labelCenterPadding" format="dimension" />
+        <!--textContent 文字与 Label 背景底部的空隙距离，默认为 10dp-->
+        <attr name="labelBottomPadding" format="dimension" />
+        <!--当设置该值大于0时显示的 Label 为梯形的样式，梯形上顶宽度与该值成正比；当不设置时 Label 为三角形样式-->
+        <attr name="labelTopDistance" format="dimension" />
+        <!--第一行文字的样式，normal、italic、bold，如果 Label 作为单行（不设置textTitle）则无效-->
+        <attr name="textTitleStyle">
+            <enum name="normal" value="0" />
+            <enum name="italic" value="1" />
+            <enum name="bold" value="2" />
+        </attr>
+        <!--第二行文字的样式，normal、italic、bold-->
+        <attr name="textContentStyle">
+            <enum name="normal" value="0" />
+            <enum name="italic" value="1" />
+            <enum name="bold" value="2" />
+        </attr>
+        <!--Label 的位置，leftTop 或者 rightTop-->
+        <attr name="direction">
+            <enum name="leftTop" value="-45" />
+            <enum name="rightTop" value="45" />
+        </attr>
+        <!--圆角半径-->
+        <attr name="labelRadius" format="dimension" />
+    </declare-styleable>
 </resources>
