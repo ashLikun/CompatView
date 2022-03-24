@@ -33,9 +33,9 @@
         <com.ashlikun.compatview.label.LabelView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:backgroundColor="@color/colorPrimary"
-            app:textTitle="1111"
-            app:textTitleColor="@color/cardview_light_background"></com.ashlikun.compatview.label.LabelView>
+            android:text="111"
+            android:textColor="@color/cardview_light_background"
+            app:lv_backgroundColor="@color/colorPrimary"></com.ashlikun.compatview.label.LabelView>
     </FrameLayout>
 
     <com.ashlikun.compatview.ExpandTextView

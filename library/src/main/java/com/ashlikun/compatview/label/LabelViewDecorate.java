@@ -35,6 +35,9 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
+
 import com.ashlikun.compatview.R;
 
 /**
@@ -83,30 +86,41 @@ public final class LabelViewDecorate {
     private float mRadius;
 
     public LabelViewDecorate(Context context, AttributeSet attrs) {
+        int colorPrimary = resolveColor(context, android.R.attr.colorPrimary, 0);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LabelView);
-        mTopPadding = typedArray.getDimension(R.styleable.LabelView_labelTopPadding,
+        mTopPadding = typedArray.getDimension(R.styleable.LabelView_lv_labelTopPadding,
                 context.getResources().getDimensionPixelSize(R.dimen.default_label_top_padding));
-        mCenterPadding = typedArray.getDimension(R.styleable.LabelView_labelCenterPadding, 0);
-        mBottomPadding = typedArray.getDimension(R.styleable.LabelView_labelBottomPadding,
+        mCenterPadding = typedArray.getDimension(R.styleable.LabelView_lv_labelCenterPadding, 0);
+        mBottomPadding = typedArray.getDimension(R.styleable.LabelView_lv_labelBottomPadding,
                 context.getResources().getDimensionPixelSize(R.dimen.default_label_bottom_padding));
-        mTopDistance = typedArray.getDimension(R.styleable.LabelView_labelTopDistance, 0);
-        mBgTriangleColor = typedArray.getColor(R.styleable.LabelView_backgroundColor, Color.BLUE);
-        mTextTitleColor = typedArray.getColor(R.styleable.LabelView_textTitleColor, Color.WHITE);
-        mTextContentColor = typedArray.getColor(R.styleable.LabelView_textContentColor, Color.WHITE);
-        mTextTitleSize = typedArray.getDimension(R.styleable.LabelView_textTitleSize,
+        mTopDistance = typedArray.getDimension(R.styleable.LabelView_lv_labelTopDistance, 0);
+        mBgTriangleColor = typedArray.getColor(R.styleable.LabelView_lv_backgroundColor, colorPrimary == 0 ? Color.BLUE : colorPrimary);
+        mTextTitleColor = typedArray.getColor(R.styleable.LabelView_android_textColor, colorPrimary == 0 ? Color.WHITE : colorPrimary);
+        mTextContentColor = typedArray.getColor(R.styleable.LabelView_lv_textContentColor, colorPrimary == 0 ? Color.WHITE : colorPrimary);
+        mTextTitleSize = typedArray.getDimension(R.styleable.LabelView_android_textSize,
                 context.getResources().getDimensionPixelSize(R.dimen.default_label_title_size));
-        mTextContentSize = typedArray.getDimension(R.styleable.LabelView_textContentSize,
+        mTextContentSize = typedArray.getDimension(R.styleable.LabelView_lv_textContentSize,
                 context.getResources().getDimensionPixelSize(R.dimen.default_label_content_size));
-        mTextTitle = typedArray.getString(R.styleable.LabelView_textTitle);
-        mTextContent = typedArray.getString(R.styleable.LabelView_textContent);
-        mTextTitleStyle = typedArray.getInt(R.styleable.LabelView_textTitleStyle, STYLE_NORMAL);
-        mTextContentStyle = typedArray.getInt(R.styleable.LabelView_textContentStyle, STYLE_NORMAL);
-        mRouteDegrees = typedArray.getInt(R.styleable.LabelView_direction, ROTATE_LEFT);
-        mRadius = typedArray.getDimension(R.styleable.LabelView_direction, 0);
+        mTextTitle = typedArray.getString(R.styleable.LabelView_android_text);
+        mTextContent = typedArray.getString(R.styleable.LabelView_lv_textContent);
+        mTextTitleStyle = typedArray.getInt(R.styleable.LabelView_lv_textTitleStyle, STYLE_NORMAL);
+        mTextContentStyle = typedArray.getInt(R.styleable.LabelView_lv_textContentStyle, STYLE_NORMAL);
+        mRouteDegrees = typedArray.getInt(R.styleable.LabelView_lv_direction, ROTATE_LEFT);
+        mRadius = typedArray.getDimension(R.styleable.LabelView_lv_direction, 0);
         typedArray.recycle();
 
         initAllArt();
         resetAllMeasureSize();
+    }
+
+    @ColorInt
+    public int resolveColor(Context context, @AttrRes int attr, int fallback) {
+        TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{attr});
+        try {
+            return a.getColor(0, fallback);
+        } finally {
+            a.recycle();
+        }
     }
 
     public void drawLabel(View view, Canvas canvas) {
