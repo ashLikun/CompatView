@@ -30,6 +30,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -51,6 +52,8 @@ import com.ashlikun.compatview.R;
 public final class LabelViewDecorate {
     private static final int ROTATE_LEFT = -45;
     private static final int ROTATE_RIGHT = 45;
+    private static final int ROTATE_LEFT_BOTTOM = -135;
+    private static final int ROTATE_RIGHT_BOTTOM = 135;
 
     private static final int STYLE_NORMAL = 0;
     private static final int STYLE_ITALIC = 1;
@@ -106,7 +109,7 @@ public final class LabelViewDecorate {
         mTextTitleStyle = typedArray.getInt(R.styleable.LabelView_lv_textTitleStyle, STYLE_NORMAL);
         mTextContentStyle = typedArray.getInt(R.styleable.LabelView_lv_textContentStyle, STYLE_NORMAL);
         mRouteDegrees = typedArray.getInt(R.styleable.LabelView_lv_direction, ROTATE_LEFT);
-        mRadius = typedArray.getDimension(R.styleable.LabelView_lv_direction, 0);
+        mRadius = typedArray.getDimension(R.styleable.LabelView_lv_labelRadius, 0);
         typedArray.recycle();
 
         initAllArt();
@@ -132,10 +135,18 @@ public final class LabelViewDecorate {
         if (mRouteDegrees == ROTATE_LEFT) {
             canvas.translate(-mBgTriangleWidth / 2, 0);
             canvas.rotate(mRouteDegrees, mBgTriangleWidth / 2, 0);
+        } else if (mRouteDegrees == ROTATE_LEFT_BOTTOM) {
+            int rotateViewWH = (int) (mBgTriangleHeight * Math.sqrt(2));
+            canvas.translate(-mBgTriangleWidth / 2, rotateViewWH);
+            canvas.rotate(mRouteDegrees, mBgTriangleWidth / 2, 0);
         } else if (mRouteDegrees == ROTATE_RIGHT) {
             int rotateViewWH = (int) (mBgTriangleHeight * Math.sqrt(2));
             canvas.translate(view.getMeasuredWidth() - rotateViewWH, -mBgTriangleHeight);
             canvas.rotate(mRouteDegrees, 0, mBgTriangleHeight);
+        } else if (mRouteDegrees == ROTATE_RIGHT_BOTTOM) {
+            int rotateViewWH = (int) (mBgTriangleHeight * Math.sqrt(2));
+            canvas.translate(view.getMeasuredWidth() - mBgTriangleWidth / 2, rotateViewWH);
+            canvas.rotate(mRouteDegrees, mBgTriangleWidth / 2, 0);
         }
 
         Path path = new Path();
@@ -145,7 +156,14 @@ public final class LabelViewDecorate {
             mTopDistance = 0;
         }
         if (mTopDistance == 0) {
-            path.lineTo(mBgTriangleWidth / 2, 0);
+            if (mRadius > 0) {
+                path.lineTo(mBgTriangleWidth / 2 - mRadius, mRadius);
+                RectF oval = new RectF(mBgTriangleWidth / 2 - mRadius, mRadius / 2, mBgTriangleWidth / 2 + mRadius, mRadius / 2 + mRadius * 2);
+                path.arcTo(oval, 225, 90);
+                path.lineTo(mBgTriangleWidth / 2 + mRadius, mRadius);
+            } else {
+                path.lineTo(mBgTriangleWidth / 2, 0);
+            }
         } else {
             path.lineTo(mBgTriangleWidth / 2 - mTopDistance, mTopDistance);
             path.lineTo(mBgTriangleWidth / 2 + mTopDistance, mTopDistance);

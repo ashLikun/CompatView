@@ -94,6 +94,8 @@
         <attr name="lv_direction">
             <enum name="leftTop" value="-45" />
             <enum name="rightTop" value="45" />
+            <enum name="leftBottom" value="-135" />
+            <enum name="rightBottom" value="135" />
         </attr>
         <!--圆角半径-->
         <attr name="lv_labelRadius" format="dimension" />
