@@ -113,7 +113,6 @@ public final class LabelViewDecorate {
         typedArray.recycle();
 
         initAllArt();
-        resetAllMeasureSize();
     }
 
     @ColorInt
@@ -158,7 +157,8 @@ public final class LabelViewDecorate {
         if (mTopDistance == 0) {
             if (mRadius > 0) {
                 path.lineTo(mBgTriangleWidth / 2 - mRadius, mRadius);
-                RectF oval = new RectF(mBgTriangleWidth / 2 - mRadius, mRadius / 2, mBgTriangleWidth / 2 + mRadius, mRadius / 2 + mRadius * 2);
+                RectF oval = new RectF(0, 0, mRadius * 2, mRadius * 2);
+                oval.offset(mBgTriangleWidth / 2 - mRadius, (float) (mRadius * Math.sqrt(2) - mRadius));
                 path.arcTo(oval, 225, 90);
                 path.lineTo(mBgTriangleWidth / 2 + mRadius, mRadius);
             } else {
@@ -192,7 +192,6 @@ public final class LabelViewDecorate {
 
     public void setTextContent(String content) {
         mTextContent = content;
-        resetAllMeasureSize();
     }
 
     public String getTextContent() {
@@ -201,7 +200,6 @@ public final class LabelViewDecorate {
 
     public void setTextTitle(String title) {
         mTextTitle = title;
-        resetAllMeasureSize();
     }
 
     public String getTextTitle() {
@@ -240,7 +238,11 @@ public final class LabelViewDecorate {
         mBgTrianglePaint.setColor(mBgTriangleColor);
     }
 
-    private void resetAllMeasureSize() {
+    public void resetAllMeasureSize(View view, int widthMeasureSpec, int heightMeasureSpec) {
+        int widthMode = View.MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode = View.MeasureSpec.getMode(heightMeasureSpec);
+        int widthSize = View.MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = View.MeasureSpec.getSize(heightMeasureSpec);
         if (!TextUtils.isEmpty(mTextTitle)) {
             mTextTitlePaint.getTextBounds(mTextTitle, 0, mTextTitle.length(), mTextTitleRect);
         }
@@ -248,8 +250,12 @@ public final class LabelViewDecorate {
         if (!TextUtils.isEmpty(mTextContent)) {
             mTextContentPaint.getTextBounds(mTextContent, 0, mTextContent.length(), mTextContentRect);
         }
-
+        int viewWH = 0;
+        if (widthMode == View.MeasureSpec.EXACTLY || heightMode == View.MeasureSpec.EXACTLY) {
+            viewWH = Math.min(widthSize, heightSize);
+        }
         mBgTriangleHeight = (int) (mTopDistance + mTopPadding + mCenterPadding + mBottomPadding + mTextTitleRect.height() + mTextContentRect.height());
+        mBgTriangleHeight = Math.max(mBgTriangleHeight, viewWH);
         mBgTriangleWidth = 2 * mBgTriangleHeight;
     }
 }

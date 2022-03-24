@@ -31,13 +31,13 @@
             app:sci_ratio="2" />
 
         <com.ashlikun.compatview.label.LabelView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom|right"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:text="111"
+            app:lv_labelRadius="10dp"
+            app:lv_textContentColor="@color/cardview_light_background"
             android:textColor="@color/cardview_light_background"
-            app:lv_direction="rightBottom"
-            app:lv_labelRadius="10dp"></com.ashlikun.compatview.label.LabelView>
+            app:lv_direction="leftTop"></com.ashlikun.compatview.label.LabelView>
     </FrameLayout>
 
     <com.ashlikun.compatview.ExpandTextView

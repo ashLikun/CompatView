@@ -50,7 +50,7 @@ public class LabelView extends View {
     public LabelView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        mLabelViewHelper = new LabelViewDecorate(context, attrs);
+        mLabelViewHelper = new LabelViewDecorate(context,  attrs);
     }
 
     public void setTextContent(String content) {
@@ -76,7 +76,7 @@ public class LabelView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mLabelViewHelper.resetAllMeasureSize(this, widthMeasureSpec, heightMeasureSpec);
         int rotateViewWH = (int) (mLabelViewHelper.getBgTriangleHeight() * Math.sqrt(2));
         setMeasuredDimension(rotateViewWH, rotateViewWH);
     }
