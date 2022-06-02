@@ -2,8 +2,10 @@ package com.ashlikun.compatview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 /**
@@ -19,6 +21,7 @@ public class ScaleImageView extends AppCompatImageView {
      * 大小比例，按照宽度
      */
     private float ratio = 16 / 9.0f;
+
     /**
      * 按照宽度（0）或者高度（1）为基础
      */
@@ -42,37 +45,86 @@ public class ScaleImageView extends AppCompatImageView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (ratio <= 0) {
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-            return;
-        }
+
+
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+//        //根据图片比例缩放
+//        if (scaleToDp > 0) {
+//            Drawable drawable = getDrawable();
+//            if (drawable != null) {
+//                if (drawable.getIntrinsicWidth() > 2 && drawable.getIntrinsicWidth() > 2) {
+//                    widthSize = dip2px((drawable.getIntrinsicWidth() / scaleToDp));
+//                    heightSize = dip2px((drawable.getIntrinsicHeight() / scaleToDp));
+//                }
+//            }
+//            setMeasuredDimension(widthSize, heightSize);
+//            return;
+//        }
+
         // 如果子类设置了精确的宽高
         if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY
                 && (widthSize != 0 && heightSize != 0)) {
             setMeasuredDimension(widthSize, heightSize);
             return;
         }
-        //宽度不变
-        if (orientation == 0) {
+
+        if (ratio > 0) {
             //宽度不变
-            if (getLayoutParams() != null && getLayoutParams().width > 0) {
-                heightSize = (int) (getLayoutParams().width / ratio);
+            if (orientation == 0) {
+                //宽度不变
+                if (getLayoutParams() != null && getLayoutParams().width > 0) {
+                    heightSize = (int) (getLayoutParams().width / ratio);
+                } else {
+                    heightSize = (int) (widthSize / ratio);
+                }
             } else {
-                heightSize = (int) (widthSize / ratio);
+                //高度不变
+                if (getLayoutParams() != null && getLayoutParams().height > 0) {
+                    widthSize = (int) (getLayoutParams().height * ratio);
+                } else {
+                    widthSize = (int) (heightSize * ratio);
+                }
+            }
+            setMeasuredDimension(widthSize, heightSize);
+        }
+        //如果只是设置了一个值，就等比例缩放
+        else if ((widthMode == MeasureSpec.EXACTLY && widthSize != 0) || (heightMode == MeasureSpec.EXACTLY && heightSize != 0)) {
+            Drawable drawable = getDrawable();
+            if (drawable != null) {
+                if (drawable.getIntrinsicWidth() > 2 && drawable.getIntrinsicWidth() > 2) {
+                    if (widthSize != 0) {
+                        float s = (widthSize / (drawable.getIntrinsicWidth() * 1f));
+                        heightSize = (int) (drawable.getIntrinsicHeight() * s);
+                    } else if (heightSize != 0) {
+                        float s = (heightSize / (drawable.getIntrinsicHeight() * 1f));
+                        widthSize = (int) (drawable.getIntrinsicHeight() * s);
+                    }
+                }
+                setMeasuredDimension(widthSize, heightSize);
+                return;
             }
         } else {
-            //高度不变
-            if (getLayoutParams() != null && getLayoutParams().height > 0) {
-                widthSize = (int) (getLayoutParams().height * ratio);
-            } else {
-                widthSize = (int) (heightSize * ratio);
-            }
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
-        setMeasuredDimension(widthSize, heightSize);
+    }
+
+    public int dip2px(float dipValue) {
+        float scale = getContext().getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
+    }
+
+    @Override
+    public void setImageDrawable(@Nullable Drawable drawable) {
+        super.setImageDrawable(drawable);
+
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+        requestLayout();
     }
 
     public float getRatio() {

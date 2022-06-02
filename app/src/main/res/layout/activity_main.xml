@@ -34,10 +34,10 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:text="111"
-            app:lv_labelRadius="10dp"
-            app:lv_textContentColor="@color/cardview_light_background"
             android:textColor="@color/cardview_light_background"
-            app:lv_direction="leftTop"></com.ashlikun.compatview.label.LabelView>
+            app:lv_direction="leftTop"
+            app:lv_labelRadius="10dp"
+            app:lv_textContentColor="@color/cardview_light_background"></com.ashlikun.compatview.label.LabelView>
     </FrameLayout>
 
     <com.ashlikun.compatview.ExpandTextView
@@ -51,7 +51,15 @@
 
     <Button
         android:id="@+id/actionExpand"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="展开" />
+
+    <com.ashlikun.compatview.ScaleImageView
+        android:id="@+id/scaleImg"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="#ff0000"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/aaaaaaaaaaaaaaaa" />
 </LinearLayout>

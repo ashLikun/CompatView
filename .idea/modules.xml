@@ -4,7 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CompatView.iml" filepath="$PROJECT_DIR$/CompatView.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CompatView.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CompatView.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CompatView.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CompatView.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CompatView.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CompatView.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CompatView.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CompatView.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/CompatView.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/CompatView.library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/CompatView.library.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/library/CompatView.library.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/CompatView.library.main.iml" filepath="$PROJECT_DIR$/.idea/modules/library/CompatView.library.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/CompatView.library.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/library/CompatView.library.unitTest.iml" />
     </modules>
   </component>
 </project>

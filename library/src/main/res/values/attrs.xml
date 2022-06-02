@@ -38,7 +38,7 @@
     </declare-styleable>
     <declare-styleable name="ScaleImageView">
         <attr name="sci_ratio" format="reference|float" />
-        <!--按照那个值为基础-->
+        <!--按照那个值为基础 与ratio只能2选一-->
         <attr name="sci_orientation">
             <enum name="width" value="0"></enum>
             <enum name="height" value="1"></enum>
